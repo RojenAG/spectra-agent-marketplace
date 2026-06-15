@@ -1,100 +1,40 @@
-# Sprint 3 — Marketplace UX: Discovery & Author Experience ✅ COMPLETE
+# Sprint 3 Complete — Marketplace UX: Discovery & Author Experience
 
-**Sprint ID:** 6a27a7e771073a3040996edc  
-**Dates:** June 9 → June 13, 2026  
-**Branch:** feat/sprint-3-discovery-author-experience  
-**Status:** COMPLETED  
+**Sprint:** Sprint 3
+**Status:** Completed ✅
+**Completed At:** 2026-06-13
+**Branch:** feat/sprint-3-discovery-author-experience
 
----
+## Goal
+Build server-side search and discovery for the agent marketplace, and deliver a full author dashboard with version timeline, time-series run analytics, and Space log viewer.
 
-## Summary
+## Tracks Delivered
 
-Sprint 3 delivered the full public-facing Discovery experience and the Author Experience dashboard, giving both end users and agent authors meaningful surfaces to interact with the marketplace.
+### Track A — Discovery
+- searchAgents backend function (query, category, sort, pagination)
+- /marketplace page with search bar, category tabs, sort, AgentCard grid
+- /marketplace/:id agent detail page
+- Server-side filtering via Base44 filter functions
+- Architect sign-off on search architecture & data flow
 
----
+### Track B — Author Experience
+- getAuthorAnalytics backend function (time-series runs, success rate, avg duration)
+- syncSpaceLogs backend function (HF Spaces API → SpaceLog entity)
+- /my-agents author dashboard (version timeline, analytics chart, Space logs)
+- AgentAnalytics entity — time-series run data per version
+- SpaceLog entity — piped HF Space logs with RLS author-only access
+- RLS enforcement & Space log sanitisation (Security sign-off)
 
-## Track A — Discovery (5 issues closed)
+## Entities Added
+- SpaceLog
+- AgentAnalytics
 
-| Task | Agent | Status |
-|---|---|---|
-| Search architecture & data flow design | 🏗️ Architect | ✅ Done |
-| `searchAgents` backend function | ⚙️ Backend | ✅ Done |
-| `/marketplace` page (search, categories, sort, grid) | 🎨 Frontend | ✅ Done |
-| `/marketplace/:id` agent detail page | 🎨 Frontend | ✅ Done |
-| Discovery acceptance criteria & edge cases | 🧪 QA | ✅ Done |
+## Backend Functions Deployed
+- searchAgents
+- getAuthorAnalytics
+- syncSpaceLogs
 
-### Key Decisions — Discovery
-- Text search executed **in-memory** after Base44 entity filter (`is_published=true` always applied)
-- **URL params** drive all search state (query, category, sort, page) → shareable/bookmarkable searches
-- `searchAgents` function: pagination at `limit=12`, supports `rating` / `popular` / `newest` sort
-- Category tabs: All | Backend | Frontend | QA | Security | Data | DevOps
+## Issues Completed: 13/13
 
----
-
-## Track B — Author Experience (6 issues closed)
-
-| Task | Agent | Status |
-|---|---|---|
-| Author dashboard architecture & entity design | 🏗️ Architect | ✅ Done |
-| `getAuthorAnalytics` backend function | ⚙️ Backend | ✅ Done |
-| `syncSpaceLogs` backend function | ⚙️ Backend | ✅ Done |
-| `/my-agents` author dashboard | 🎨 Frontend | ✅ Done |
-| RLS enforcement & Space log sanitisation | 🔒 Security | ✅ Done |
-| Author Dashboard acceptance criteria & edge cases | 🧪 QA | ✅ Done |
-
-### Key Decisions — Author Experience
-- **RLS enforced at two layers:** entity level (`created_by`) AND function level (explicit 403 on ownership mismatch)
-- `syncSpaceLogs` only fetches when Space status = `RUNNING` or `RUNNING_BUILDING`
-- Log sanitisation strips `user:/input:/prompt:/query:` prefixed lines, truncates at 2000 chars, caps at 500 lines
-- Analytics aggregated at **daily grain** from `AgentRun` records, 30-day default window
-- `/my-agents` dashboard: three tabs — My Listings | Analytics | Space Logs
-
----
-
-## New Entities
-
-| Entity | Fields |
-|---|---|
-| `SpaceLog` | space_id, agent_listing_version_id, log_lines[], fetched_at |
-| `AgentAnalytics` | agent_listing_id, version_id, date, run_count, success_count, avg_duration_ms |
-
----
-
-## Deployed Backend Functions
-
-| Function | Description |
-|---|---|
-| `searchAgents` | Query, category filter, sort, paginate published AgentListings |
-| `getAuthorAnalytics` | Time-series runs/success/duration for an agent listing (auth-gated) |
-| `syncSpaceLogs` | Fetch & sanitise HF Space logs → write to SpaceLog entity |
-
----
-
-## QA Coverage
-
-**Discovery:** 7 Gherkin scenarios + edge cases (whitespace query, page overflow, XSS safety, unpublished agent visibility)
-
-**Author Dashboard:** 7 Gherkin scenarios + edge cases (RLS 403, empty states, analytics aggregation, log auto-refresh, revoked version badge, 2000-char log boundary)
-
----
-
-## Sprint Learnings
-
-- In-memory text search pattern is sufficient at current scale; consider full-text index at >10k listings
-- URL-param driven search state is reusable for any future filtered list page
-- Service-role + ownership-check pattern established as standard for all author-scoped functions
-- HF Space log polling should respect Space warm state to avoid unnecessary API calls
-
----
-
-## Roadmap
-
-| Sprint | Focus |
-|---|---|
-| Sprint 4 | Agent Collaboration |
-| Sprint 5 | Monetization |
-
----
-
-*Generated by Spectra — Spec-Driven Development Orchestrator*  
-*Completed: 2026-06-13*
+All acceptance criteria met. Sprint closed 2026-06-13.
+Completion marker pushed 2026-06-15 (Sprint 5 hygiene fix).
