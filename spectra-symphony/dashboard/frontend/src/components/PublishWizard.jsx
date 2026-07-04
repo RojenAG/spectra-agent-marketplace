@@ -86,13 +86,11 @@ export default function PublishWizard({ onClose, onSuccess }) {
   return (
     <div style={styles.overlay}>
       <div style={styles.modal}>
-        {/* Header */}
         <div style={styles.header}>
           <span style={styles.title}>Publish an Agent</span>
           <button onClick={onClose} style={styles.closeBtn}>✕</button>
         </div>
 
-        {/* Step indicator */}
         <div style={styles.stepBar}>
           {STEPS.map((label, i) => (
             <div key={i} style={styles.stepItem}>
@@ -106,7 +104,6 @@ export default function PublishWizard({ onClose, onSuccess }) {
           ))}
         </div>
 
-        {/* Step 0: Details */}
         {step === 0 && (
           <div style={styles.body}>
             <Field label="Agent Name" error={errors.name}>
@@ -132,7 +129,6 @@ export default function PublishWizard({ onClose, onSuccess }) {
           </div>
         )}
 
-        {/* Step 1: Space & Capabilities */}
         {step === 1 && (
           <div style={styles.body}>
             <Field label="HuggingFace Space URL" error={errors.space_url}>
@@ -159,7 +155,6 @@ export default function PublishWizard({ onClose, onSuccess }) {
           </div>
         )}
 
-        {/* Step 2: Review */}
         {step === 2 && (
           <div style={styles.body}>
             <div style={styles.reviewCard}>
@@ -178,7 +173,6 @@ export default function PublishWizard({ onClose, onSuccess }) {
           </div>
         )}
 
-        {/* Footer */}
         <div style={styles.footer}>
           {step > 0 && (
             <button style={styles.secondaryBtn} onClick={back} disabled={submitting}>Back</button>
