@@ -1,0 +1,62 @@
+{
+  "type": "object",
+  "properties": {
+    "agent_listing_id": {
+      "type": "string"
+    },
+    "version": {
+      "type": "number"
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "config_schema": {
+      "type": "object"
+    },
+    "changelog": {
+      "type": "string"
+    },
+    "is_latest": {
+      "type": "boolean"
+    },
+    "published_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "moderation_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "pending_human_review",
+        "auto_approved",
+        "approved",
+        "rejected",
+        "revoked"
+      ]
+    },
+    "moderation_notes": {
+      "type": "string"
+    },
+    "space_url": {
+      "type": "string"
+    },
+    "space_id": {
+      "type": "string"
+    },
+    "space_status": {
+      "type": "string",
+      "enum": [
+        "provisioning",
+        "ready",
+        "paused",
+        "resuming",
+        "error"
+      ]
+    }
+  },
+  "required": [],
+  "name": "AgentListingVersion"
+}
