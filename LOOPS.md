@@ -59,24 +59,33 @@ re-checked until it passes.
   and chose to keep the loop as-is for now — accepted as a known risk, no
   repair applied.**
 
-## 3. Credit budget alert (potential loop — monitor only, no corrective action)
+## 3. Credit budget alert loop (repaired 2026-07-05)
 
 **One-sentence explanation:** Every 12 hours, check daily/monthly credit
-usage and alert if it crosses 90%.
+usage; a fresh crossing of 90% gets a plain heads-up, but a *sustained*
+crossing escalates with a concrete cost breakdown and a specific suggestion
+instead of repeating the same generic alert.
 
 - **Trigger:** Scheduled, every 12 hours.
-- **Action:** "Budget Alert - 90% Credit Usage" reads current usage from
-  context.
-- **Check:** Usage ≥ 90% daily or monthly.
-- **Stop conditions:** None that change behavior — it alerts or no-ops, it
-  doesn't take a corrective action based on the result. This is why it's
-  flagged as a *potential* loop rather than a qualified one: it's missing "a
-  next action that can change in response to fresh feedback." Worth
-  discussing if you want it to actually do something (e.g. pause
-  non-essential automations) when the threshold is crossed.
-- **Evidence:** Live scheduled automation, one occurrence pattern (recurring
-  schedule, not yet observed reacting differently to different usage levels).
+- **Action:** "Budget Alert - 90% Credit Usage" reads current daily/monthly
+  usage from context.
+- **Check:** Usage ≥ 90% daily or monthly. If so, checks memory for the last
+  recorded alert level this billing cycle to tell a fresh crossing from a
+  sustained one.
+- **Stop conditions:** Below 90% on both → clean no-op. Fresh crossing →
+  plain WhatsApp alert, records the crossing to memory. Sustained crossing
+  (still ≥90% since the last alert) → escalates: summarizes which
+  automations ran and their cost since the last alert, and suggests a
+  concrete next step (pause a specific low-value automation, or upgrade)
+  instead of repeating the same message.
+- **Evidence:** Live scheduled automation.
 - **Saved:** 2026-07-05
+- **Audit note (2026-07-05):** Loop Doctor verdict = Repair needed — the
+  original version only alerted or no-op'd with no action that changed based
+  on fresh feedback. **Repaired same day**: added the fresh-vs-sustained
+  memory check and the escalation path described above. This closes the
+  missing "next action that can change in response to feedback" gap. Updated
+  live via `manage_automation` (schedule and 12h cadence unchanged).
 
 ---
 
