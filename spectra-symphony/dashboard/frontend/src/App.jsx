@@ -7,6 +7,7 @@ import ApprovalButton from './components/ApprovalButton'
 import MyAgentsPanel from './components/MyAgentsPanel'
 import AnalyticsPanel from './components/AnalyticsPanel'
 import MarketplacePanel from './components/MarketplacePanel'
+import AgentDetailPage from './components/AgentDetailPage'
 
 const POLL_MS = 3000
 const TABS = [
@@ -21,6 +22,7 @@ export default function App() {
   const [error, setError] = useState(null)
   const [lastUpdated, setLastUpdated] = useState(null)
   const [analyticsAgent, setAnalyticsAgent] = useState(null)
+  const [detailAgentId, setDetailAgentId] = useState(null)
 
   useEffect(() => {
     if (tab !== 'sprint') return
@@ -64,7 +66,11 @@ export default function App() {
         {TABS.map((t) => (
           <button
             key={t.id}
-            onClick={() => { setTab(t.id); if (t.id !== 'my-agents') setAnalyticsAgent(null) }}
+            onClick={() => {
+              setTab(t.id)
+              if (t.id !== 'my-agents') setAnalyticsAgent(null)
+              if (t.id !== 'marketplace') setDetailAgentId(null)
+            }}
             style={{
               ...styles.tabBtn,
               ...(tab === t.id ? styles.tabBtnActive : {}),
@@ -113,7 +119,13 @@ export default function App() {
         )
       )}
 
-      {tab === 'marketplace' && <MarketplacePanel />}
+      {tab === 'marketplace' && (
+        detailAgentId ? (
+          <AgentDetailPage agentListingId={detailAgentId} onBack={() => setDetailAgentId(null)} />
+        ) : (
+          <MarketplacePanel onSelectAgent={setDetailAgentId} />
+        )
+      )}
     </div>
   )
 }

@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 const CATEGORIES = ["", "architect", "backend", "frontend", "qa", "security", "data", "devops", "custom"];
 const DEBOUNCE_MS = 350;
 
-export default function MarketplacePanel() {
+export default function MarketplacePanel({ onSelectAgent }) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("");
   const [sort, setSort] = useState("newest");
@@ -77,7 +77,13 @@ export default function MarketplacePanel() {
           ) : (
             <div style={styles.grid}>
               {results.map((r) => (
-                <div key={r.id} style={styles.card}>
+                <div
+                  key={r.id}
+                  style={styles.card}
+                  onClick={() => onSelectAgent && onSelectAgent(r.id)}
+                  role={onSelectAgent ? "button" : undefined}
+                  tabIndex={onSelectAgent ? 0 : undefined}
+                >
                   <div style={styles.cardHeader}>
                     <span style={styles.cardTitle}>{r.name}</span>
                     <span style={styles.cardCategory}>{r.category}</span>
@@ -119,7 +125,7 @@ const styles = {
     background: "#1f2937", borderRadius: 10, border: "1px solid #374151",
   },
   grid: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 14 },
-  card: { background: "#111827", border: "1px solid #1f2937", borderRadius: 10, padding: 16 },
+  card: { background: "#111827", border: "1px solid #1f2937", borderRadius: 10, padding: 16, cursor: "pointer" },
   cardHeader: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 6 },
   cardTitle: { color: "#f9fafb", fontWeight: 700, fontSize: 14 },
   cardCategory: {
