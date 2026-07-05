@@ -48,6 +48,16 @@ re-checked until it passes.
   Sprint 6 `ModerationStatusBanner`/`PublishWizard` resubmit UI built
   specifically to support this cycle.
 - **Saved:** 2026-07-05
+- **Audit note (2026-07-05):** Loop Doctor verdict = Repair needed. Findings:
+  (1) checks are structural only (empty fields, URL pattern) — passing them
+  auto-publishes to the public marketplace with no human review boundary;
+  (2) the check is applied by the agent reacting to the trigger rather than a
+  fixed deterministic function, so judgment could drift slightly between
+  runs. Suggested minimal repair: add a one-time human review gate for a new
+  author's *first* listing only (repeat authors stay fully automatic), or log
+  every auto-approval into a spot-check queue. **Decision: PO reviewed this
+  and chose to keep the loop as-is for now — accepted as a known risk, no
+  repair applied.**
 
 ## 3. Credit budget alert (potential loop — monitor only, no corrective action)
 
