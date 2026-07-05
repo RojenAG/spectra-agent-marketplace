@@ -44,6 +44,22 @@ export default function ModerationStatusBanner({ version, listingId, onResubmit 
     );
   }
 
+  if (status === "pending_human_review") {
+    return (
+      <div style={{ ...styles.banner, ...styles.pending }}>
+        <span style={styles.icon}>👀</span>
+        <div>
+          <div style={styles.bannerTitle}>First listing — manual review</div>
+          <div style={styles.bannerSub}>
+            Your submission passed all automatic checks. Since this is your first
+            published agent, a human is doing a quick one-time review before it
+            goes live. Future listings from you will publish automatically.
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (status === "auto_approved" || status === "approved") {
     const marketplaceUrl = `https://spencer-69b3fd9b.base44.app/marketplace`;
     return (
