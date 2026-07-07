@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "properties": {
+    "space_id": {
+      "type": "string"
+    },
+    "agent_listing_version_id": {
+      "type": "string"
+    },
+    "log_lines": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "fetched_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [],
+  "name": "SpaceLog"
+}
