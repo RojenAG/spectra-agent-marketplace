@@ -1,0 +1,47 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "architect",
+        "backend",
+        "frontend",
+        "qa",
+        "security",
+        "data",
+        "devops",
+        "custom"
+      ]
+    },
+    "author": {
+      "type": "string"
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "config_schema": {
+      "type": "object"
+    },
+    "is_published": {
+      "type": "boolean"
+    },
+    "average_rating": {
+      "type": "number"
+    },
+    "run_count": {
+      "type": "number"
+    }
+  },
+  "required": [],
+  "name": "AgentListing"
+}
