@@ -58,6 +58,11 @@ re-checked until it passes.
   every auto-approval into a spot-check queue. **Decision: PO reviewed this
   and chose to keep the loop as-is for now — accepted as a known risk, no
   repair applied.**
+- **Update (2026-07-07):** Repair actually implemented in Sprint 9 — see
+  `SPRINT9_SPEC.md`. New author's first passing listing now gets
+  `pending_human_review` + a WhatsApp approve/reject step
+  (`APPROVE AGENT <id>` / `REJECT AGENT <id> <reason>`); repeat authors are
+  unaffected and stay fully automatic.
 
 ## 3. Credit budget alert loop (repaired 2026-07-05)
 
@@ -86,6 +91,46 @@ instead of repeating the same generic alert.
   memory check and the escalation path described above. This closes the
   missing "next action that can change in response to feedback" gap. Updated
   live via `manage_automation` (schedule and 12h cadence unchanged).
+
+## 4. ID-lookup hardening check
+
+**One-sentence explanation:** Any backend function that looks up an entity
+by a client-supplied ID needs to return a clean 404/400 on a malformed or
+unknown ID instead of crashing with a 500 — and this has already had to be
+caught twice.
+
+- **Trigger:** A new (or edited) backend function accepts an entity ID from
+  client input (e.g. `agent_listing_id`) and looks it up via
+  `entities.X.filter({ id })`.
+- **Action:** QA/review tests the endpoint with a malformed or nonexistent
+  ID, not just valid ones.
+- **Check:** Does the lookup crash with an unhandled 500 (bad ObjectId cast,
+  etc.), or does it return a clean 4xx?
+- **Stop conditions:** Pass = wrapped in try/catch with a graceful
+  "not found" response (the pattern now used in both `getAgentDetail.ts` and
+  `getAuthorAnalytics.ts`). Fail = fix before merge, matching the Sprint 7
+  fix.
+- **Evidence:** Proven recurrent — `getAuthorAnalytics.ts` originally crashed
+  on an unknown `agent_listing_id` (found + fixed during Sprint 7 QA), and
+  the identical defensive pattern was then proactively built into
+  `getAgentDetail.ts` from the start in Sprint 8. Two concrete occurrences
+  across two sprints.
+- **Saved:** 2026-07-07
+
+---
+
+## Candidate loop — not yet saved as proven
+
+**WhatsApp @mention specialist routing**
+(`spectra-symphony/integrations/whatsapp_routing_protocol.md`): a designed
+protocol where Spectra posts `@Handle <task>` to a WhatsApp group, the named
+specialist agent replies `✅ @Spectra [DONE]`, with a 5-minute silent-timeout
+escalation rule. Only validated once, as a Sprint 4 spike
+(Spectra → @BackendAgent → @QAAgent → Spectra) — not in active production
+use, since specialists currently run as personas inside this single
+conversation rather than separate WhatsApp-connected agents. Worth
+formalizing as Loop 5 if/when that multi-number setup actually gets used
+for real work.
 
 ---
 
