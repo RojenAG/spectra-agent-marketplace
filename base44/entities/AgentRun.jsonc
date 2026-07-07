@@ -1,0 +1,47 @@
+{
+  "type": "object",
+  "properties": {
+    "issue_id": {
+      "type": "string"
+    },
+    "sprint_id": {
+      "type": "string"
+    },
+    "agent_type": {
+      "type": "string"
+    },
+    "agent_listing_version_id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "running",
+        "completed",
+        "failed",
+        "cancelled",
+        "paused"
+      ]
+    },
+    "output": {
+      "type": "string"
+    },
+    "proposed_context_updates": {
+      "type": "object"
+    },
+    "error": {
+      "type": "string"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [],
+  "name": "AgentRun"
+}
