@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "properties": {
+    "agent_listing_id": {
+      "type": "string"
+    },
+    "issue_id": {
+      "type": "string"
+    },
+    "rating": {
+      "type": "number"
+    },
+    "comment": {
+      "type": "string"
+    }
+  },
+  "required": [],
+  "name": "AgentReview"
+}
