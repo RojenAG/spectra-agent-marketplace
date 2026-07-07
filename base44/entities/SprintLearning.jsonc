@@ -1,0 +1,37 @@
+{
+  "type": "object",
+  "properties": {
+    "sprint_id": {
+      "type": "string"
+    },
+    "project_name": {
+      "type": "string"
+    },
+    "tech_stack": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "patterns_used": {
+      "type": "string"
+    },
+    "data_models": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "key_decisions": {
+      "type": "string"
+    },
+    "reusable_skills": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [],
+  "name": "SprintLearning"
+}
