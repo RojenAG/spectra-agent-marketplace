@@ -1,0 +1,48 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "project_id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "upcoming",
+        "active",
+        "pending_approval",
+        "approved",
+        "rejected",
+        "completed"
+      ]
+    },
+    "start_date": {
+      "type": "string"
+    },
+    "end_date": {
+      "type": "string"
+    },
+    "goal": {
+      "type": "string"
+    },
+    "spec_output": {
+      "type": "string"
+    },
+    "github_repo_url": {
+      "type": "string"
+    },
+    "rejection_feedback": {
+      "type": "string"
+    },
+    "completed_at": {
+      "type": "string"
+    },
+    "approved_at": {
+      "type": "string"
+    }
+  },
+  "required": [],
+  "name": "Sprint"
+}
