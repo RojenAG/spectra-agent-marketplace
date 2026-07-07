@@ -1,0 +1,79 @@
+{
+  "type": "object",
+  "properties": {
+    "issue_id": {
+      "type": "string"
+    },
+    "sprint_id": {
+      "type": "string"
+    },
+    "system_design": {
+      "type": "string"
+    },
+    "tech_stack": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "data_models": {
+      "type": "object"
+    },
+    "api_contracts": {
+      "type": "object"
+    },
+    "ui_flows": {
+      "type": "string"
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "edge_cases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "test_scenarios": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "auth_requirements": {
+      "type": "string"
+    },
+    "risk_notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "open_questions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dev_stage": {
+      "type": "string",
+      "enum": [
+        "greenfield",
+        "prototype",
+        "active",
+        "production"
+      ]
+    },
+    "version": {
+      "type": "number"
+    },
+    "last_updated_by": {
+      "type": "string"
+    }
+  },
+  "required": [],
+  "name": "SpecContext"
+}
