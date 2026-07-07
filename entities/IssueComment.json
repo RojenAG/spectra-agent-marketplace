@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "properties": {
+    "issue_id": {
+      "type": "string"
+    },
+    "author_name": {
+      "type": "string"
+    },
+    "author_type": {
+      "type": "string",
+      "enum": [
+        "human",
+        "agent"
+      ]
+    },
+    "agent_role": {
+      "type": "string"
+    },
+    "content": {
+      "type": "string"
+    }
+  },
+  "required": [],
+  "name": "IssueComment"
+}
