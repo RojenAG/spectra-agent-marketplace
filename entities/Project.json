@@ -1,0 +1,40 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "workspace_id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "paused",
+        "completed",
+        "cancelled"
+      ]
+    },
+    "color": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "string"
+    },
+    "start_date": {
+      "type": "string"
+    },
+    "target_date": {
+      "type": "string"
+    },
+    "lead_name": {
+      "type": "string"
+    }
+  },
+  "required": [],
+  "name": "Project"
+}
