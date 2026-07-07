@@ -90,7 +90,9 @@ automatically.
 | 8 | Marketplace completion — agent detail page, reviews & ratings, run-trigger flow with idempotency guards |
 | 9 | Trust & safety hardening — first-time-author human review gate on top of auto-moderation |
 
-Full detail for recent sprints: `SPRINT7_SPEC.md`, `SPRINT8_SPEC.md`,
+Sprints 1–7 are condensed into `HISTORY.md` — they built the foundation but
+are superseded by later work. Sprints 8 and 9 still describe what's
+currently live, so they keep their own files: `SPRINT8_SPEC.md`,
 `SPRINT9_SPEC.md`. Recurring operational patterns (sprint approval loop,
 auto-moderation resubmit loop, credit budget alert loop) are documented in
 `LOOPS.md`.
