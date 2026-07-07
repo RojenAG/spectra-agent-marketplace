@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "properties": {
+    "agent_listing_id": {
+      "type": "string"
+    },
+    "version_id": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "run_count": {
+      "type": "number"
+    },
+    "success_count": {
+      "type": "number"
+    },
+    "avg_duration_ms": {
+      "type": "number"
+    }
+  },
+  "required": [],
+  "name": "AgentAnalytics"
+}
